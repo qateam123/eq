@@ -1,0 +1,94 @@
+{% extends theme('layouts/_twocol.html') %}
+
+{% block page_title %}Survey{% endblock %}
+
+{% set state = content %}
+
+{% set group = state.schema_item.container %}
+{% set block = state.schema_item %}
+{% set all_errors = state.get_errors().items() %}
+
+{%- block subheader -%}
+
+  {% if previous_location or navigation %}
+
+  <div class="container">
+    {% if previous_location %}
+      <a class="page__previous" id="top-previous" href="{{previous_location}}">Previous</a>
+    {% endif %}
+
+    {% if navigation %}
+      <div class="page__menubtn">
+        <button class="btn btn--link pluto btn--menu js-menu-btn" data-close-label="{{_('Hide sections')}}" type="button" id="menu-btn">{{_('View sections')}}</button>
+      </div>
+    {% endif %}
+  </div>
+
+  {% endif %}
+
+{%- endblock subheader -%}
+
+{% block sidebar %}
+  {% if navigation %}
+    {% include theme('partials/navigation.html') %}
+  {% endif %}
+{% endblock %}
+
+{% block main %}
+
+    {% if all_errors %}
+
+    <div class="panel panel--error u-mb-s" data-qa="error">
+      <div class="panel__header">
+        <h1 class="panel__title venus">This page has {{all_errors|length}} errors</h1>
+      </div>
+      <div class="panel__body" data-qa="error-body">
+        <p class="mars">These <strong>must be corrected</strong> to continue.</p>
+        <ul class="list list--bare">
+          {% for item_id, errors in all_errors %}
+            {% set loop_index = loop.index %}
+            {% if errors %}
+            {% for error in errors %}
+            <li class="list__item mars">
+              {{loop_index}}) <a class="js-inpagelink" href="#{{item_id}}">{{ error }}</a>
+            </li>
+            {% endfor %}
+            {% endif %}
+          {% endfor %}
+          </ul>
+        </div>
+      </div>
+
+
+    {% endif %}
+
+    <form action="{{form_action|default('')}}" class="form qa-questionnaire-form" role="form" method="POST" novalidate>
+
+      <div class="group" id="{{group.id}}">
+
+        <div class="block" id="{{block.id}}">
+
+        {% for section in state.children %}
+
+          {% include 'partials/section.html' %}
+
+        {% endfor %}
+
+        </div>
+
+      </div>
+
+      <button class="btn btn--primary btn--lg qa-btn-submit venus" type="submit" name="action[save_continue]">{% block submit_button_text %}Save and continue{% endblock %}</button>
+      <div>
+        <button class="btn btn--link mars" type="submit" name="action[save_sign_out]">{% block save_sign_out_button_text %}Save and complete later{% endblock %}</button>
+      </div>
+    </form>
+
+{% endblock main %}
+
+{% block prefooter %}
+
+  {% if previous_location %}
+    <a class="page__previous page__previous--bottom" href="{{previous_location}}" id="bottom-previous">Previous</a>
+  {% endif %}
+{% endblock prefooter %}

@@ -1,0 +1,12 @@
+{% set attr = {
+  "class": "input input--textarea js-charlimit-input",
+  "name": textarea.name,
+  "id": "input-" ~ textarea.id,
+  "placeholder": textarea.placeholder,
+  "rows": "8",
+  "cols": "60",
+} %}
+
+{% set answer_helper = textarea.name ~ "-helper" %}
+
+<textarea {{attr|xmlattr}}>{{textarea.value}}</textarea>

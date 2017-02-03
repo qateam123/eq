@@ -1,0 +1,74 @@
+{
+    "mime_type": "application/json/ons/eq",
+    "questionnaire_id": "0",
+    "schema_version": "0.0.1",
+    "data_version": "0.0.1",
+    "survey_id": "0",
+    "title": "Final confirmation to submit",
+    "theme": "default",
+    "legal_basis": "StatisticsOfTradeAct",
+    "description": "A questionnaire to demo final confirmation to submit.",
+    "introduction": {
+        "description": ""
+    },
+    "messages": {
+        "INTEGER_TOO_LARGE": "Number is too large",
+        "NEGATIVE_INTEGER": "Number cannot be less than zero",
+        "NOT_INTEGER": "Please enter an integer"
+    },
+    "groups": [
+        {
+            "blocks": [
+                {
+                    "type": "questionnaire",
+                    "id": "block-1",
+                    "sections": [
+                        {
+                            "description": "",
+                            "id": "ed3e200a-0735-4e8d-9eea-627c1d908697",
+                            "questions": [
+                                {
+                                    "answers": [
+                                        {
+                                            "guidance": "",
+                                            "id": "ca3ce3a3-ae44-4e30-8f85-5b6a7a2fb23c",
+                                            "label": "What is your favourite breakfast food",
+                                            "mandatory": false,
+                                            "options": [],
+                                            "q_code": "0",
+                                            "type": "TextField"
+                                        }
+                                    ],
+                                    "description": "",
+                                    "id": "4bfa0229-0ce8-4190-817b-535f55ad2817",
+                                    "title": "",
+                                    "type": "General"
+                                }
+                            ],
+                            "title": "What is your favourite breakfast food"
+                        }
+                    ],
+                    "routing_rules": [
+                    ],
+                    "title": ""
+                },
+                {
+                    "type": "questionnaire",
+                    "sections": [],
+                    "id": "confirmation",
+                    "title": "Thank you for your answers, do you wish to submit",
+                    "sections": [
+                        {
+                            "title": "Thank you for your answers, do you wish to submit",
+                            "id": "questionnaire-completed-section",
+                            "questions": [
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "id": "14ba4707-321d-441d-8d21-b8367366e766",
+            "title": ""
+        }
+    ]
+}

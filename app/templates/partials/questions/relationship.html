@@ -1,0 +1,44 @@
+{% import 'macros/helpers.html' as helpers %}
+
+<div class="relationship">
+
+    <h2 class="question__title neptune">
+      {%- if question_number -%}
+        <span>{{question_number}}. </span>
+      {% endif %}
+      {{question_title|safe}}
+    </h2>
+    {{question_description|safe}}
+
+    <div class="js-relationship">
+
+        {%- for answer in question.answers -%}
+
+            {{ answer.schema_item.widget.render(answer) | safe}}
+
+        {%- endfor -%}
+
+    </div>
+
+</div>
+
+{% if (question.schema_item.guidance) %}
+
+  {% set question_guidance %}
+    {%- for guidance in question.schema_item.guidance -%}
+      <ul class="u-m-no">
+        {%- for item in guidance.list -%}
+          <li>{{item|safe}}</li>
+        {% endfor %}
+      </ul>
+    {% endfor %}
+  {% endset %}
+
+  {% with answer_guidance = {
+    'id': question.schema_item.id,
+    'label': question.schema_item.label,
+    'content': question_guidance
+  } %}
+    {% include 'partials/answer-guidance.html' %}
+  {% endwith %}
+{% endif %}

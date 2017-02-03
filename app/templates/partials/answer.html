@@ -1,0 +1,55 @@
+{% import 'macros/helpers.html' as helpers %}
+
+{% set invalid = answer.is_valid == False %}
+
+<div class="answer answer--{{answer.schema_item.type|lower}} {{'js-has-errors' if invalid}}" id="{{answer.schema_item.widget.id}}">
+
+  {% if render_guidance != False %}
+
+  {%- set answer_guidance %}
+    {% if answer.schema_item.guidance %}
+      {% with answer_guidance = {
+        'id': answer.schema_item.id,
+        'label': answer.schema_item.label,
+        'content': answer.schema_item.guidance
+      } %}
+        {% include 'partials/answer-guidance.html' %}
+      {% endwith %}
+    {% endif %}
+  {% endset -%}
+
+  {% endif %}
+
+  {%- set answer_fields %}
+    <div class="answer__fields js-fields">
+      {% if answer.schema_item.display and answer.schema_item.display.properties %}
+        {% set use_grid = answer.schema_item.display.properties.columns %}
+      {% endif %}
+      {% include 'partials/answers/' ~ answer.schema_item.type|lower ~ '.html' %}
+    </div>
+  {% endset -%}
+
+  {% if invalid %}
+
+    <div class="panel panel--simple panel--error" data-qa="error">
+      <div class="panel__header">
+        {% if answer.errors %}
+        <ul class="list list--bare list--errors">
+          {% for error in answer.errors %}
+          <li class="list__item mars" {{helpers.errorTracking(question.id, error)}}>{{ error }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+      <div class="panel__body" data-qa="error-body">
+        {{answer_fields|safe}}
+      </div>
+    </div>
+
+    {{answer_guidance|safe}}
+
+  {% else %}
+    {{answer_fields|safe}}
+    {{answer_guidance|safe}}
+  {% endif %}
+</div>

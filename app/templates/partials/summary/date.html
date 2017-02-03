@@ -1,0 +1,5 @@
+{% if question.type == 'DateRange' %}
+    {{answer.value|format_str_as_date_range}}
+{% else %}
+    {{answer.value|format_str_as_date}}
+{% endif %}

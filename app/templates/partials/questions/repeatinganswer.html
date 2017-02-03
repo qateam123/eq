@@ -1,0 +1,60 @@
+{%- set composite_answers = question.answers_grouped_by_instance() -%}
+
+<div class="question question--repeatinganswer" id="{{question.id}}">
+
+  <h2 class="question__title neptune">
+    {%- if question_number -%}
+      <span>{{question_number}}. </span>
+    {% endif %}
+    {{question_title|safe}}
+  </h2>
+
+  {{question_description|safe}}
+  {{question_guidance|safe}}
+
+  <div class="question__answers">
+    {%- for composite_answer in composite_answers %}
+      <div class="question__answer js-household-person" data-remove="{{ _('Remove') }}" data-index="{{loop.index}}">
+        <h3 class="neptune">{{ _('Person ') }}<span class="js-household-loopindex">{{ loop.index }}</span>
+          <small>(
+          {%- if loop.index == 1 -%}
+             <span class="js-household-action">{{ _('You') }}</span>
+          {%- else -%}
+            <button class="btn btn--link pluto js-btn-remove" name="action[remove_answer]" value="{{ loop.index0 }}" type="button">{{ _('Remove') }}
+              <span class="u-vh">{{ _('Person') }} {{loop.index0}}</span>
+            </button>
+          {%- endif -%}
+          )</small>
+        </h3>
+        <fieldset class="question__fieldset">
+          <legend class="question__legend u-vh">{{ _('Person ') }} {{ loop.index }}</legend>
+          {% for answer in composite_answer %}
+            {% with render_guidance = False %}
+              {% include theme('partials/answer.html') %}
+            {% endwith %}
+          {% endfor %}
+        </fieldset>
+      </div>
+    {%- endfor %}
+  </div>
+
+  <div class="question__actions">
+    <button class="btn btn--border btn--secondary venus js-household-btn" type="submit" name="action[add_answer]">
+      {{ _('Add another person') }}
+    </button>
+  </div>
+
+  <div class="question__guidance  question__guidance--bottom">
+    {% set schema_item = composite_answers[0][-1].schema_item %}
+    {% if schema_item.guidance %}
+      {% with answer_guidance = {
+        'id': schema_item.id,
+        'label': schema_item.label,
+        'content': schema_item.guidance
+        } %}
+        {% include 'partials/answer-guidance.html' %}
+      {% endwith %}
+    {% endif %}
+  </div>
+
+</div>
