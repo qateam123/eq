@@ -24,18 +24,14 @@ class SubmitterFactory(object):
 
 class Submitter(object):
 
-    def send_answers(self, message, eqSurvey=True):
+    def send_answers(self, message, queue):
         """
         Sends the answers to rabbit mq and returns a timestamp for submission
         :param message: The payload to submit
         :raise: a submission failed exception
         """
-        sent = None
         encrypted_message = self.encrypt_message(message)
-        if eqSurvey:
-            sent = self.send_message(encrypted_message, settings.EQ_RABBITMQ_QUEUE_NAME)
-        else:
-            sent = self.send_message(encrypted_message, 'feedback-submissions')
+        sent = self.send_message(encrypted_message, queue)
 
         if not sent:
             raise SubmissionFailedException()

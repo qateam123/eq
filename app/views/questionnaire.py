@@ -29,6 +29,8 @@ from app.utilities.schema import get_schema
 from app.views.errors import MultipleSurveyError
 from app.views import feedback
 
+from app import settings
+
 import sys
 
 logger = logging.getLogger(__name__)
@@ -222,7 +224,7 @@ def submit_answers(eq_id, form_type, collection_id):
         path_finder = PathFinder(g.schema_json, answer_store, metadata)
         submitter = SubmitterFactory.get_submitter()
         message = convert_answers(metadata, g.schema, answer_store, path_finder.get_routing_path())
-        submitter.send_answers(message)
+        submitter.send_answers(message, queue=settings.EQ_RABBITMQ_QUEUE_NAME)
         logger.info("Responses submitted tx_id=%s", metadata["tx_id"])
         return redirect(url_for('.get_thank_you', eq_id=eq_id, form_type=form_type, collection_id=collection_id))
     else:

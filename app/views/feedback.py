@@ -18,6 +18,7 @@ from app.cryptography.jwt_encoder import Encoder
 from app.schema_loader.schema_loader import available_schemas
 
 from datetime import datetime, timezone
+from app import settings
 
 # pylint: disable=too-many-locals
 logger = logging.getLogger(__name__)
@@ -49,7 +50,7 @@ def get_feedback():
         }
 
         submitter = SubmitterFactory.get_submitter()
-        submitter.send_answers(message, eqSurvey = False)
+        submitter.send_answers(message, queue = settings.EQ_RABBITMQ_FEEDBACK_QUEUE_NAME)
 
         session.clear()
         return render_template("thank-you-feedback.html")
