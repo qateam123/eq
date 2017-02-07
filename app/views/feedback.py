@@ -31,7 +31,7 @@ def get_feedback():
     if request.method == "POST":
         form = request.form
         satisfaction = form.get('satisfaction')
-        survey_type = form.get('surveyType')
+        survey_type = session.get('form_type')
         comment = form.get('comment')
         submitted_at = datetime.now(timezone.utc)
 
@@ -49,6 +49,6 @@ def get_feedback():
             session.clear()
             return render_template("thank-you-feedback.html")
         else:
-            return render_template("feedback.html", form_type=session.get('form_type'), error=True)
+            return render_template("feedback.html", error=True)
 
-    return render_template("feedback.html", form_type=session.get('form_type'), error=False)
+    return render_template("feedback.html", error=False)
