@@ -47,6 +47,20 @@
     <h1 class="section__title saturn">1. Give Feedback</h1>
 </div>
 <div class="section" id="section">
+
+{% if error %}
+<br/>
+<h3>Error</h3>
+<!-- Start: @inline--error -->
+<div class="alert alert--simple alert--error">
+    <div class="alert__body">
+        Please select your satisfaction.
+    </div>
+</div>
+<!-- End: @inline--error -->
+<br/>
+{% endif %}
+
   <form action="/feedback" method="POST" xmlns="http://www.w3.org/1999/html">
     <h2 class="section__title saturn">1.1 How Satisfied were you with the Survey?</h2>
     <label class="label  venus" for="text-input">Please do not enter any Personal or Sensitive data.

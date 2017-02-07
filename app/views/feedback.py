@@ -35,21 +35,20 @@ def get_feedback():
         comment = form.get('comment')
         submitted_at = datetime.now(timezone.utc)
 
-        message = {
-            'submitted_at': submitted_at.isoformat(),
-            'survey_type': survey_type,
-            'satisfaction': satisfaction,
-            'comment': comment,
-        }
+        if satisfaction:
+            message = {
+                'submitted_at': submitted_at.isoformat(),
+                'survey_type': survey_type,
+                'satisfaction': satisfaction,
+                'comment': comment,
+            }
 
-        submitter = SubmitterFactory.get_submitter()
-        submitter.send_answers(message, queue=settings.EQ_RABBITMQ_FEEDBACK_QUEUE_NAME)
+            submitter = SubmitterFactory.get_submitter()
+            submitter.send_answers(message, queue=settings.EQ_RABBITMQ_FEEDBACK_QUEUE_NAME)
 
-        session.clear()
-        return render_template("thank-you-feedback.html")
+            session.clear()
+            return render_template("thank-you-feedback.html")
+        else:
+            return render_template("feedback.html", form_type=session.get('form_type'), error=True)
 
-    if g.referrer is not None:
-        values = g.referrer[7:].split("/")
-        return render_template("feedback.html", form_type=values[3])
-    else:
-        raise NotFound
+    return render_template("feedback.html", form_type=session.get('form_type'), error=False)

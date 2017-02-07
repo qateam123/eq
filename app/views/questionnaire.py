@@ -198,6 +198,7 @@ def get_thank_you(eq_id, form_type, collection_id):  # pylint: disable=unused-ar
         # Delete user data on request of thank you page.
         _delete_user_data()
         session['feedback'] = True
+        session['form_type'] = form_type
         return thank_you_page
 
 
