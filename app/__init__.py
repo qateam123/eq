@@ -18,7 +18,7 @@ from app.authentication.cookie_session import SHA256SecureCookieSessionInterface
 from app.data_model.database import db_session
 from app.libs.utils import get_locale
 from app.submitter.submitter import SubmitterFactory
- 
+
 SECURE_HEADERS = {
     'Cache-Control': 'no-cache, no-store, must-revalidate',
     'Pragma': 'no-cache',

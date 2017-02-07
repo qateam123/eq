@@ -27,11 +27,9 @@ from app.templating.summary_context import build_summary_rendering_context
 from app.templating.template_renderer import renderer
 from app.utilities.schema import get_schema
 from app.views.errors import MultipleSurveyError
-from app.views import feedback
 
 from app import settings
 
-import sys
 
 logger = logging.getLogger(__name__)
 
