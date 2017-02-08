@@ -42,6 +42,14 @@
 {% endblock footer %}
 
 {% block content %}
+<div class="grid grid--reverse">
+  <div class="grid__col col-4@m">
+    {% block sidebar %}{% endblock %}
+  </div>
+
+  <div class="grid__col col-7@m pull-1@m">
+    <div role="main" id="main" class="page__main">
+      {% block main %}
 
 <div class="section" id="section">
 
@@ -107,5 +115,8 @@ Please do not enter anything that you would not be prepared to publish.</b></lab
 <input type="submit" class="btn btn--lg" value="Submit Feedback" />
 </div>
 </form>
-
+{% endblock %}
+</div>
+</div>
+</div>
 {% endblock content %}
