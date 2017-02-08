@@ -1,5 +1,5 @@
 {% set _theme="default" %}
-{% extends 'layouts/_base.html' %} {% block page_title %}Feedback{% endblock %}
+{% extends theme('layouts/_base.html') %} {% block page_title %}Feedback{% endblock %}
 
 {% block header %}
 <div class="page__header">
@@ -44,16 +44,13 @@
 {% block content %}
 
 <div class="section" id="section">
-    <h1 class="section__title saturn">1. Give Feedback</h1>
-</div>
-<div class="section" id="section">
 
 {% if error %}
 <br/>
 <h3>Error</h3>
 <!-- Start: @inline--error -->
-<div class="alert alert--simple alert--error">
-    <div class="alert__body">
+<div class="panel panel--simple panel--error">
+    <div class="panel__body">
         Please select your satisfaction.
     </div>
 </div>
@@ -62,34 +59,32 @@
 {% endif %}
 
   <form action="/feedback" method="POST" xmlns="http://www.w3.org/1999/html">
-    <h2 class="section__title saturn">1.1 How Satisfied were you with the Survey?</h2>
-    <label class="label  venus" for="text-input">Please do not enter any Personal or Sensitive data.
-      Please do not enter anything that you would not be prepared to publish.</label>
-    <div class="field field--radio">
+    <h1 class="section__title saturn">1. How Satisfied were you with the Survey?</h1>
+    <div class="field field--multiplechoice">
       <div class="field__item js-focusable-box">
-          <input class="input input--radio js-focusable" type="radio" id="very satisfied" name="satisfaction" value="very satisfied">
+          <input class="input input--radio js-focusable" type="radio" id="very satisfied" name="satisfaction" value="very satisfied" field--multiplechoice>
           <label class="label label--inline venus" for="very satisfied">Very Satisfied</label>
       </div>
   </div>
-  <div class="field field--radio">
+  <div class="field field--multiplechoice">
     <div class="field__item js-focusable-box">
         <input class="input input--radio js-focusable" type="radio" id="satisfied" name="satisfaction" value="satisfied">
         <label class="label label--inline venus" for="satisfied">Satisfied</label>
     </div>
 </div>
-<div class="field field--radio">
+<div class="field field--multiplechoice">
   <div class="field__item js-focusable-box">
       <input class="input input--radio js-focusable" type="radio" id="neither" name="satisfaction" value="neither">
       <label class="label label--inline venus" for="neither">Neither Satisfied or Dissatisfied</label>
   </div>
 </div>
-<div class="field field--radio">
+<div class="field field--multiplechoice">
   <div class="field__item js-focusable-box">
       <input class="input input--radio js-focusable" type="radio" id="dissatisfied" name="satisfaction" value="dissatisfied">
       <label class="label label--inline venus" for="dissatisfied">Dissatisfied</label>
   </div>
 </div>
-<div class="field field--radio">
+<div class="field field--multiplechoice">
   <div class="field__item js-focusable-box">
       <input class="input input--radio js-focusable" type="radio" id="very dissatisfied" name="satisfaction" value="very dissatisfied">
       <label class="label label--inline venus" for="very dissatisfied">Very Dissatisfied</label>
@@ -98,12 +93,17 @@
 
 </div>
 <div class="section" id="section">
-    <h1 class="section__title saturn">1.2 Please Give Comments</h1>
-    <label class="label  venus" for="text-input">Please do not enter any Personal or Sensitive data.
-Please do not enter anything that you would not be prepared to publish.</label>
+    <h1 class="section__title saturn">2. Please Give Comments</h1>
+    <ul class="">
+      <li class="list__item">Please give comments on your experience</li>
+      <li class="list__item">Please give comments on any issues that arose</li>
+      <li class="list__item">Please give comments if there are any improvements you would like to suggest</li>
+    </ul>
+    <label class="label  venus" for="text-input"><b>Please do not enter any Personal or Sensitive data.
+Please do not enter anything that you would not be prepared to publish.</b></label>
 <label class="label input--textarea js-charlimit-input" for="input--multiline">Feedback</label>
 <textarea class="input input--textarea js-charlimit-input" name="comment" id="comment" rows="8" cols="60"></textarea>
-
+<br/>
 <input type="submit" class="btn btn--lg" value="Submit Feedback" />
 </div>
 </form>
