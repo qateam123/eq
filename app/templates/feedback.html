@@ -66,7 +66,7 @@
 <br/>
 {% endif %}
 
-  <form action="/feedback" method="POST" xmlns="http://www.w3.org/1999/html">
+  <form action="/feedback" method="POST" xmlns="http://www.w3.org/1999/html" id="feedback">
     <h1 class="section__title saturn">1. How Satisfied were you with the Survey?</h1>
     <div class="field field--multiplechoice">
       <div class="field__item js-focusable-box">
@@ -108,7 +108,7 @@ Please do not enter anything that you would not be prepared to publish.</b></lab
 <label class="label input--textarea js-charlimit-input" for="input--multiline">Feedback</label>
 <textarea class="input input--textarea js-charlimit-input" name="comment" id="comment" rows="8" cols="60"></textarea>
 <br/>
-<input type="submit" class="btn btn--lg" value="Submit Feedback" />
+<input type="submit" class="btn btn--lg qa-btn-submit-answers" value="Submit Feedback" />
 </div>
 </form>
 {% endblock %}
