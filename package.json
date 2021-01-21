@@ -108,7 +108,7 @@
     "selenium-webdriver": "^3.0.0-beta-2",
     "sinon": "^1.17.2",
     "sinon-chai": "^2.8.0",
-    "socket.io": "1.4.8",
+    "socket.io": "2.4.0",
     "stylelint": "7.2.0",
     "stylelint-config-standard": "^13.0.0",
     "the-a11y-machine": "github:hamishtaplin/TheA11yMachine",
